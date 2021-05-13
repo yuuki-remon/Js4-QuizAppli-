@@ -1,0 +1,15 @@
+ul {
+  list-style: none; 
+}
+
+.hidden {
+  display: none;  
+}
+
+#start-button {
+  user-select: none;
+}
+
+#genre, #difficulty {
+  font-weight: bold;
+}
