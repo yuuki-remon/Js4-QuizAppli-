@@ -1,0 +1,16 @@
+ul {
+  list-style: none; 
+}
+
+.hidden {
+  display: none;  
+}
+
+button {
+  user-select: none;
+  cursor: pointer;
+}
+
+#genre, #difficulty {
+  font-weight: bold;
+}
