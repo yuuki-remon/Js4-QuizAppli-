@@ -6,8 +6,9 @@ ul {
   display: none;  
 }
 
-#start-button {
+button {
   user-select: none;
+  cursor: pointer;
 }
 
 #genre, #difficulty {

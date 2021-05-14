@@ -1,26 +1,18 @@
 {
-  const fetchQuizData = () => {
+  const fetchQuizData = async () => {
     primaryElement.textContent = '取得中';
     questionElement.textContent = '少々お待ちください'; 
     
-    fetch("https://opentdb.com/api.php?amount=10&type=multiple")
-    .then(response => {
-      return response.json();
-    })
-    .then(data => {
-      const quizData = data.results;
-      const quizInstance = new Quiz(quizData);
-      
-      createQuizField(quizInstance);
-    })
-    .catch(error => {
-      alert('error 再度読み込んでください');
-    });
-  };
+    const response = await fetch("https://opentdb.com/api.php?amount=10&type=multiple");
+    const data = await response.json();
+    const quizInstance = new Quiz(data);
+
+    createQuizField(quizInstance);
+  }
   
   class Quiz {
-    constructor(quizData) {
-      this.quizzes = quizData;
+    constructor(data) {
+      this.quizzes = data.results;
       this.quizCount = 0;
       this.correctAnswer = 0;
     }
@@ -74,7 +66,7 @@
   const startButton = document.getElementById('start-button');
 
   startButton.addEventListener('click', () => {
-    startButton.classList.add('hidden');
+    startButton.remove();
     fetchQuizData();
   });
   
@@ -119,8 +111,8 @@
   const finishQuizEvent = quizInstance => {
     primaryElement.textContent = `あなたの正答数は${quizInstance.correctAnswer}です！！`;
     questionElement.textContent = '再チャレンジしたい場合は下のボタンをクリック！';
-    genreElement.classList.add('hidden');
-    difficultyElement.classList.add('hidden');
+    genreElement.remove();
+    difficultyElement.remove();
     
     const returnBtn = document.createElement('button');
     returnBtn.textContent = 'ホームに戻る'; 
